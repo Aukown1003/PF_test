@@ -11,6 +11,21 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'layouts/header' %>
+    <main>
+      <!--フラッシュメッセージの表示-->
+      <% if flash[:notice] %>
+        <div class="alert alert-success" role="alert">
+          <i class="fas fa-check-circle"></i><%= notice %>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger" role="alert">
+          <i class="fas fa-exclamation-triangle mr-2"></i><%= alert %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </main>
+    <!--< %= render 'layouts/footer' %>-->
   </body>
 </html>

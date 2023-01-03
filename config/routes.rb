@@ -1,6 +1,24 @@
 Rails.application.routes.draw do
-  devise_for :admins
-  devise_for :users
-  root to: 'homes#top'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # 制限有りはdevise_for :users,skip: [:passwords], controllers: {
+  devise_for :users, controllers: {
+    registrations: "public/registrations",
+    sessions: 'public/sessions'
+  }
+  scope module: :public do
+    root to: 'homes#top'
+    get "/about"=>"homes#about"
+    
+  end
+  # 制限有りはdevise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+  devise_for :admin ,controllers: {
+    sessions: "admin/sessions"
+  }
+  namespace :admin do
+    root to: 'homes#top'
+    #以下adminはすべてこの中に
+  end
 end
+
+# test_user
+# test@mail
+# 111111
