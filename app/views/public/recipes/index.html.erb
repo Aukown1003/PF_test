@@ -1,0 +1,17 @@
+<div class="container my-5">
+  <div class="row">
+    <table class="table">
+      
+    </table>
+    <% @recipes.each do |recipe| %>
+      <div class="col">
+        <%= link_to recipe.title, recipe_path(id: recipe.id) %></br>
+        <%= recipe.temperature %>℃</br>
+        <%= recipe.total_time %>分</br>
+        <%= recipe.low_temperature_cooking_time %>分
+        <p><%= render "/public/recipes/review", recipe: recipe %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
+

@@ -7,7 +7,13 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get "/about"=>"homes#about"
-    
+    resources :users, except: [:new, :index, :create] do
+      get "unsubscribe"=>"users#unsubscribe"
+      patch "withdrawal"=>"users#withdrawal"
+    end
+    resources :recipes do
+      resources :reviews, only: [:index, :create]
+    end
   end
   # 制限有りはdevise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   devise_for :admin ,controllers: {
