@@ -11,12 +11,13 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get "/about"=>"homes#about"
-    resources :users, except: [:new, :index, :create] do
+    resources :users, except: [:new, :create] do
       get "unsubscribe"=>"users#unsubscribe"
       patch "withdrawal"=>"users#withdrawal"
     end
     resources :recipes do
       resources :reviews, only: [:index, :create]
+      resources :reports, only: [:new, :create]#暫定追加、実証時削除
     end
   end
   # 制限有りはdevise_for :admin, skip: [:registrations, :passwords] ,controllers: {
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
   }
   namespace :admin do
     root to: 'homes#top'
+    resources :user, only: [:index, :edit, :update, :destroy]
     #以下adminはすべてこの中に
   end
 end

@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+
+      <div class="modal-version border border-dark mb-3">
+        <h5>モーダルversion</h5>
+        <div id="mask" class="hidden"></div>
+        <div id="modal" class="hidden"></div>
+        <% @users.each do |user| %>
+          <p class="ms-3"><%= link_to user.name, user_path(user.id), remote: true %></p>
+        <% end %>
+      </div>
+
+      <div class="acordion-version border border-dark">
+        <h5>アコーディオンversion</h5>
+        <% @users.each do |user| %>
+          <div class="user-details border border-dark">
+            <p class="user-name ms-3" style="cursor: pointer;"><%= user.name %></p>
+            <div class="bottom-item" style="display: none;">
+              <% unless user.name.present? %>
+                <p><%= link_to "フォローする", root_path, class: "btn btn-primary" %></p>
+              <% end %>
+              <p><%= link_to "フォローを外す", root_path, class: "btn btn-danger" %></p>
+              <p><%= link_to "グループの作成", root_path, class: "btn btn-success" %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  $(function(){
+    $('.user-name').click(function(){
+      $(this).next('.bottom-item').slideToggle();
+      $(this).toggleClass("open");
+      $('.user-name').not($(this)).next('.bottom-item').slideUp();
+      $('.user-name').not($(this)).removeClass("open");
+    });
+  });
+</script>

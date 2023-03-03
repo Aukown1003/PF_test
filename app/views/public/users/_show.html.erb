@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <p class="user-name ms-3" style="cursor: pointer;"><%= user.name %></p>
+      <% unless user.name.present? %>
+        <p><%= link_to "フォローする", root_path, class: "btn btn-primary" %></p>
+      <% end %>
+      <p><%= link_to "フォローを外す", root_path, class: "btn btn-danger" %></p>
+      <p><%= link_to "グループの作成", root_path, class: "btn btn-success" %></p>
+    </div>
+  </div>
+</div>

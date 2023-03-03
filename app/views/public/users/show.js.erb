@@ -1,0 +1,14 @@
+var modal = document.getElementById('modal');
+var mask = document.getElementById('mask');
+
+modal.innerHTML = '<%= escape_javascript(render partial: 'show', locals: { user: @user }) %>';
+
+<!--// # hiddenクラスを消してモーダルとマスクを表示させる。-->
+modal.classList.remove('hidden');
+mask.classList.remove('hidden');
+
+<!--// # モーダルの外側（マスク）をクリックするとhiddenクラスが書き込まれ、モーダルとマスクが再び非表示となる-->
+mask.addEventListener('click', () => {
+  modal.classList.add('hidden');
+  mask.classList.add('hidden');
+  });
